@@ -1,22 +1,19 @@
 var smoothScrolling = (function() {
 
-  //by Peter-Paul Koch & Alex Tingle. 
+  //idea by Peter-Paul Koch & Alex Tingle. 
   //http://blog.firetree.net/2005/07/04/javascript-find-position/
   function findPosY(obj) {
-    var curtop = 0;
-    if (obj.offsetParent) {
-      while (1) {
-        curtop += obj.offsetTop;
-        if (!obj.offsetParent) {
-          break;
-        }
-        obj = obj.offsetParent;
-      }
+    var top = 0;
+    while (obj.offsetParent) {
+      top += obj.offsetTop;
+      obj = obj.offsetParent;
     }
-    else if (obj.y) {
-      curtop += obj.y;
+
+    if (obj.y) {
+      top += obj.y;
     }
-    return curtop;
+
+    return top;
   }
 
   function start(element, speed) {
